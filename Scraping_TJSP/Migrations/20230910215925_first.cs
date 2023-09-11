@@ -22,7 +22,6 @@ namespace Scraping_TJSP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Relator", x => x.NomeRelatorId);
-                    table.ForeignKey("NomeRelatorId", x => x.NomeRelatorId, "Relator");
                 });
 
             migrationBuilder.CreateTable(
@@ -41,9 +40,8 @@ namespace Scraping_TJSP.Migrations
                 {
                     table.PrimaryKey("PK_Decisao", x => x.Id);
                     table.UniqueConstraint("Ementa", x => x.Ementa);
+                    table.ForeignKey("NomeRelatorId", x => x.NomeRelatorId, "Relator");
                 });
-
-
         }
 
         /// <inheritdoc />

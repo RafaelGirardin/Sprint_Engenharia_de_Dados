@@ -28,7 +28,7 @@ namespace Scraping_TJSP
             Thread.Sleep(1000);
             driver.FindElement(By.Id("iddados.buscaInteiroTeor")).Click();
             Thread.Sleep(1000);
-            driver.FindElement(By.Name("dados.buscaEmenta")).SendKeys("\"provido\" \"PROVIDO\"");
+            driver.FindElement(By.Name("dados.buscaEmenta")).SendKeys("\"Recurso defensivo\"");
             Thread.Sleep(1000);
             driver.FindElement(By.Id("botaoProcurar_assuntos")).Click();
             Thread.Sleep(1000);
@@ -51,7 +51,7 @@ namespace Scraping_TJSP
             driver.FindElement(By.Id("pbSubmit")).Click();
             Thread.Sleep(1000);
             var decisoes = new List<string>();
-            for (int i = 0; i < 271; i++)
+            for (int i = 0; i < 97; i++)
             {
                 this.CapturaDecisoes(decisoes);
                 driver.FindElement(By.Name("A" + (i + 2))).Click();
@@ -67,7 +67,7 @@ namespace Scraping_TJSP
             for (int i = 0; i < decisoes.Count; i++)
             {
                 var decisao = decisoes.ElementAt(i);
-                if (decisao.Contains("provido"))
+                if (decisao.Contains("recurso defensivo"))
                 {
                     decisoesComStatus.Add(decisao);
                 }
@@ -88,7 +88,14 @@ namespace Scraping_TJSP
                 var ementa = regexEmenta.Match(decisaoComStatus).Groups["conteudo"].Value;
                 var relator = regexRelator.Match(decisaoComStatus).Groups["relator"].Value.Replace("\r", "");
                 var comarca = regexComarca.Match(decisaoComStatus).Groups["comarca"].Value.Replace("\r", "");
-                var publicacao = DateTime.Parse(regexPublicacao.Match(decisaoComStatus).Groups["publicacao"].Value.Replace("\r", "").Replace("/", "-"), new CultureInfo("pt-br"));
+                DateTime publicacao = DateTime.Parse("01-01-0001", new CultureInfo("pt-br"));
+                try
+                {
+                    publicacao = DateTime.Parse(regexPublicacao.Match(decisaoComStatus).Groups["publicacao"].Value.Replace("\r", "").Replace("/", "-"), new CultureInfo("pt-br"));
+                }catch (Exception ex) 
+                {
+                    Console.WriteLine(ex.ToString());
+                }
                 var assunto = regexAssunto.Match(decisaoComStatus).Groups["assunto"].Value.Replace("\r", "");
                 var relatorBanco = new Relator() { NomeRelatorId = relator };
                 var decisaoBanco = new Decisao() { Ementa = ementa, Assunto = assunto, NomeRelatorId = relator, Comarca = comarca, Publicacao = publicacao };

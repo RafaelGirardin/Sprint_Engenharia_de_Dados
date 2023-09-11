@@ -9,7 +9,7 @@ namespace Scraping_TJSP
         public virtual DbSet<Relator> Relator { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=RafaelMGPF\\SQLEXPRESS;Initial Catalog=DecisoesTJSP_MVP_Dados;Integrated Security=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=RafaelMGPF\\SQLEXPRESS;Initial Catalog=BD_Sprint_Engenharia_de_Dados;Integrated Security=True;TrustServerCertificate=True");
         }
 
     }
