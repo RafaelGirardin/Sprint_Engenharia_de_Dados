@@ -12,7 +12,6 @@ namespace Scraping_TJSP
         private IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         private IJavaScriptExecutor js;
-
         protected void TearDown()
         {
             driver.Quit();
