@@ -11,6 +11,5 @@ namespace Scraping_TJSP
         {
             optionsBuilder.UseSqlServer("Data Source=RafaelMGPF\\SQLEXPRESS;Initial Catalog=BD_Sprint_Engenharia_de_Dados;Integrated Security=True;TrustServerCertificate=True");
         }
-
     }
 }
